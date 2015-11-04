@@ -1,0 +1,15 @@
+MANIFEST.in
+README.rst
+blanc_documents.egg-info/PKG-INFO
+blanc_documents.egg-info/SOURCES.txt
+blanc_documents.egg-info/dependency_links.txt
+blanc_documents.egg-info/top_level.txt
+documents/__init__.py
+documents/admin.py
+documents/apps.py
+documents/choices.py
+documents/mixins.py
+documents/models.py
+documents/urls.py
+documents/views.py
+documents/migrations/__init__.py
