@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.urlresolvers import reverse
 
 
 @python_2_unicode_compatible
@@ -27,11 +28,8 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('category-list', (), {
-            'slug': self.slug,
-        })
+        return reverse('blanc-documents:category-list', args=(self.slug,))
 
 
 @python_2_unicode_compatible
@@ -55,11 +53,8 @@ class Document(models.Model):
     def __str__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('detail', (), {
-            'slug': self.slug,
-        })
+        return reverse('blanc-documents:detail', args=(self.slug,))
 
     def save(self, *args, **kwargs):
         # Avoid doing file size requests constantly
