@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100, db_index=True)),
                 ('slug', models.SlugField(unique=True, max_length=100)),
-                ('document', models.FileField(max_length=200, upload_to=b'documents/document/%Y/%m')),
+                ('document', models.FileField(max_length=200, upload_to='documents/document/%Y/%m')),
                 ('file_size', models.PositiveIntegerField(default=0, editable=False)),
                 ('summary', models.TextField(blank=True)),
                 ('published', models.BooleanField(default=True, db_index=True)),
