@@ -26,7 +26,7 @@ class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
     fieldsets = (
         ('Document', {
             'fields': (
-                'title', 'category', 'document', 'document_format', 'summary',
+                'title', 'category', 'author', 'document', 'document_format', 'summary',
             )
         }),
         ('Advanced options', {
@@ -46,4 +46,3 @@ class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
         return '<a href="%s">%s</a>' % (redirect_url, 'URL')
     admin_url.short_description = 'URL'
     admin_url.allow_tags = True
-

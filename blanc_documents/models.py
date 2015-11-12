@@ -6,6 +6,8 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 
+from blanc_pages.mixins import GlitterMixin
+
 
 @python_2_unicode_compatible
 class Format(models.Model):
@@ -35,20 +37,19 @@ class Category(models.Model):
 
 
 @python_2_unicode_compatible
-class Document(models.Model):
+class Document(GlitterMixin):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(Category)
     document = models.FileField(max_length=200, upload_to='documents/document/%Y/%m')
+    author = models.CharField(blank=True, max_length=32)
     file_size = models.PositiveIntegerField(default=0, editable=False)
     document_format = models.ForeignKey(Format)
     summary = models.TextField(blank=True)
-    published = models.BooleanField(default=True, db_index=True)
-    current_version = models.ForeignKey('glitter.Version', blank=True, null=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
+    class Meta(GlitterMixin.Meta):
         get_latest_by = 'created_at'
         ordering = ('-created_at',)
 
@@ -63,4 +64,3 @@ class Document(models.Model):
         self.file_size = self.document.size
 
         super(Document, self).save(*args, **kwargs)
-
