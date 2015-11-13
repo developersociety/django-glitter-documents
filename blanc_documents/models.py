@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+import os
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
@@ -64,3 +66,6 @@ class Document(GlitterMixin):
         self.file_size = self.document.size
 
         super(Document, self).save(*args, **kwargs)
+
+    def get_file_name(self):
+        return os.path.basename(self.document.name)
