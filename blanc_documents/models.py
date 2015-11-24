@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 
 from blanc_pages.mixins import GlitterMixin
+from blanc_pages.models import BaseBlock
 
 
 @python_2_unicode_compatible
@@ -69,3 +70,10 @@ class Document(GlitterMixin):
 
     def get_file_name(self):
         return os.path.basename(self.document.name)
+
+
+class LatestDocumentsBlock(BaseBlock):
+    category = models.ForeignKey(Category, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'latest documents'

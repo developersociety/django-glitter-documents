@@ -2,9 +2,10 @@
 
 from django.contrib import admin
 
+from blanc_pages import block_admin
 from blanc_pages.admin import BlancPageAdminMixin
 
-from .models import Format, Category, Document
+from .models import Category, Document, Format, LatestDocumentsBlock
 
 
 @admin.register(Format)
@@ -38,3 +39,7 @@ class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',)
     }
+
+
+block_admin.site.register(LatestDocumentsBlock)
+block_admin.site.register_block(LatestDocumentsBlock, 'Documents')
