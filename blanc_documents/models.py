@@ -48,8 +48,8 @@ class Document(GlitterMixin):
     file_size = models.PositiveIntegerField(default=0, editable=False)
     document_format = models.ForeignKey(Format)
     summary = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    updated_at = models.DateTimeField(auto_now=True, db_index=True)
 
     class Meta(GlitterMixin.Meta):
         get_latest_by = 'created_at'
