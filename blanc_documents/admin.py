@@ -34,7 +34,7 @@ class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
     )
     date_hierarchy = 'created_at'
     list_display = ('title', 'category', 'document_format', 'file_size',)
-    list_filter = ('category__title',)
+    list_filter = ('category',)
     prepopulated_fields = {
         'slug': ('title',)
     }
