@@ -42,4 +42,4 @@ class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
 
 
 block_admin.site.register(LatestDocumentsBlock)
-block_admin.site.register_block(LatestDocumentsBlock, 'Documents')
+block_admin.site.register_block(LatestDocumentsBlock, 'App Blocks')
