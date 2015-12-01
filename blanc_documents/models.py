@@ -7,6 +7,7 @@ import os
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
+from PIL import Image
 
 from blanc_pages.mixins import GlitterMixin
 from blanc_pages.models import BaseBlock
@@ -45,6 +46,7 @@ class Document(GlitterMixin):
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(Category)
     document = models.FileField(max_length=200, upload_to='documents/document/%Y/%m')
+    valid_image = models.BooleanField(default=False, editable=False)
     author = models.CharField(blank=True, max_length=32)
     file_size = models.PositiveIntegerField(default=0, editable=False)
     document_format = models.ForeignKey(Format)
@@ -65,6 +67,13 @@ class Document(GlitterMixin):
     def save(self, *args, **kwargs):
         # Avoid doing file size requests constantly
         self.file_size = self.document.size
+
+        # See if it's a valid image, so we can show a thumbnail for it
+        try:
+            Image.open(self.document).verify()
+            self.valid_image = True
+        except Exception:
+            self.valid_image = False
 
         super(Document, self).save(*args, **kwargs)
 
