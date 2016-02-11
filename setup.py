@@ -2,11 +2,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='blanc-documents',
+    name='glitter-documents',
     version='0.1',
-    description='Blanc Documents',
+    description='Glitter Documents',
     long_description=open('README.rst').read(),
-    url='https://github.com/blancltd/blanc-documents',
+    url='https://github.com/blancltd/glitter-documents',
     maintainer='Blanc Ltd',
     maintainer_email='studio@blanc.ltd.uk',
     platforms=['any'],

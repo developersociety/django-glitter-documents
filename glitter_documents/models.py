@@ -9,8 +9,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
 from PIL import Image
 
-from blanc_pages.mixins import GlitterMixin
-from blanc_pages.models import BaseBlock
+from glitter.mixins import GlitterMixin
+from glitter.models import BaseBlock
 
 
 @python_2_unicode_compatible
@@ -37,7 +37,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blanc-documents:category-list', args=(self.slug,))
+        return reverse('glitter-documents:category-list', args=(self.slug,))
 
 
 @python_2_unicode_compatible
@@ -62,7 +62,7 @@ class Document(GlitterMixin):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blanc-documents:detail', args=(self.slug,))
+        return reverse('glitter-documents:detail', args=(self.slug,))
 
     def save(self, *args, **kwargs):
         # Avoid doing file size requests constantly

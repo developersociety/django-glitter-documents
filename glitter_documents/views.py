@@ -3,7 +3,7 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
-from blanc_pages.mixins import BlancPageDetailMixin
+from glitter.mixins import GlitterDetailMixin
 
 from .mixins import DocumentMixin
 from .models import Category, Document
@@ -14,7 +14,7 @@ class DocumentListView(DocumentMixin, ListView):
     queryset = Document.objects.published()
 
 
-class DocumentDetailView(DocumentMixin, BlancPageDetailMixin, DetailView):
+class DocumentDetailView(DocumentMixin, GlitterDetailMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(DocumentDetailView, self).get_context_data(**kwargs)
         context['current_category'] = self.object.category

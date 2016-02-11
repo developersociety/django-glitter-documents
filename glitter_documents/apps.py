@@ -4,6 +4,6 @@ from django.apps import AppConfig
 
 
 class DocumentsConfig(AppConfig):
-    name = 'blanc_documents'
-    label = 'blanc_documents'
+    name = 'glitter_documents'
+    label = 'glitter_documents'
     verbose_name = 'Documents'

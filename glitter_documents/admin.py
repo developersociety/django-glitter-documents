@@ -2,8 +2,8 @@
 
 from django.contrib import admin
 
-from blanc_pages import block_admin
-from blanc_pages.admin import BlancPageAdminMixin
+from glitter import block_admin
+from glitter.admin import GlitterAdminMixin
 
 from .models import Category, Document, Format, LatestDocumentsBlock
 
@@ -22,7 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Document)
-class DocumentAdmin(BlancPageAdminMixin, admin.ModelAdmin):
+class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     fieldsets = (
         ('Document', {
             'fields': (
