@@ -12,8 +12,4 @@ class DocumentIndex(indexes.SearchIndex, indexes.Indexable):
         return Document
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.select_related().filter(
-            published=True
-        ).exclude(
-            current_version=None
-        )
+        return self.get_model().objects.published().select_related()
