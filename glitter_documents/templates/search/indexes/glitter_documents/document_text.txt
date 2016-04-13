@@ -1,4 +1,5 @@
 {{ object.title }}
 {{ object.category }}
+{{ object.author }}
+{{ object.document_format }}
 {{ object.summary }}
-{{ object.updated_at }}
