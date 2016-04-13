@@ -2,11 +2,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='glitter-documents',
+    name='django-glitter-documents',
     version='0.1',
     description='Glitter Documents',
     long_description=open('README.rst').read(),
-    url='https://github.com/blancltd/glitter-documents',
+    url='https://github.com/blancltd/django-glitter-documents',
     maintainer='Blanc Ltd',
     maintainer_email='studio@blanc.ltd.uk',
     platforms=['any'],
