@@ -10,7 +10,7 @@ with open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='django-glitter-documents',
-    version='0.1',
+    version='0.2',
     description='Glitter Documents',
     long_description=readme,
     url='https://github.com/blancltd/django-glitter-documents',
@@ -19,6 +19,10 @@ setup(
     platforms=['any'],
     packages=find_packages(),
     include_package_data=True,
+    install_requires=[
+        'django-glitter',
+        'django-taggit>=0.21.3',
+    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',

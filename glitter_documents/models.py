@@ -7,10 +7,11 @@ import os
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
-from PIL import Image
 
+from PIL import Image
 from glitter.mixins import GlitterMixin
 from glitter.models import BaseBlock
+from taggit.managers import TaggableManager
 
 
 @python_2_unicode_compatible
@@ -53,6 +54,8 @@ class Document(GlitterMixin):
     summary = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True, db_index=True)
+
+    tags = TaggableManager(blank=True)
 
     class Meta(GlitterMixin.Meta):
         get_latest_by = 'created_at'
