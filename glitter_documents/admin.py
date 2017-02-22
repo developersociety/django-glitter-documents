@@ -26,7 +26,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Document)
 class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     date_hierarchy = 'created_at'
-    list_display = ('title', 'category', 'document_format', 'file_size',)
+    list_display = ('title', 'category', 'document_format', 'file_size', 'is_published')
     list_filter = ('category',)
     prepopulated_fields = {
         'slug': ('title',)
