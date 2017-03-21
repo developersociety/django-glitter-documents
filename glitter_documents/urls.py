@@ -23,6 +23,3 @@ urlpatterns = [
         name='category-list'
     ),
 ]
-
-
-
