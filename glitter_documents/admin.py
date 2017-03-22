@@ -22,6 +22,26 @@ class CategoryAdmin(admin.ModelAdmin):
         'slug': ('title',)
     }
 
+    def render_change_form(self, request, context, *args, **kwargs):
+        if 'original' in context and context['original']:
+            qs = context['adminform'].form.fields['parent_category'].queryset
+            # To restrict to a simple 2 level dependencies we do the following:
+            # - If this category is a parent, it can't have a parent, so no
+            #   entries are listed.
+            if context['original'].category_set.all().exists():
+                qs = context['original'].__class__.objects.none()
+            else:
+                # - Exclude itself, you can't be your own parent.
+                qs = qs.exclude(pk=context['original'].pk)
+                # - Categories that have a parent can't be a parent, so filter
+                #   out these categories.
+                qs = qs.filter(parent_category__isnull=True)
+            
+            context['adminform'].form.fields['parent_category'].queryset = qs
+
+        returns = super().render_change_form(request, context, *args, **kwargs)
+        return returns
+
 
 @admin.register(Document)
 class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):

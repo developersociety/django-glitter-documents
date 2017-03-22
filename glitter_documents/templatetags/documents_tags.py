@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django import template
+from django.db.models import Q
 
 from ..models import Category, Document
 
@@ -15,11 +16,13 @@ def get_latest_documents(count=5, category=None):
 
     document_list = Document.objects.published()
 
-    # Optional filter by category
+    # Optional filter by category, can be either a sub or parent category
     if category is not None:
-        if isinstance(category, Category):
-            document_list = document_list.filter(category=category)
-        else:
-            document_list = document_list.filter(category__slug=category)
+        if not isinstance(category, Category):
+            category = Category.objects.get(slug=category)
+
+        query = Q(pk=category.pk) | Q(parent_category=category)
+        categories = Category.objects.filter(query)
+        document_list = document_list.filter(category__in=categories)
 
     return document_list[:count]
