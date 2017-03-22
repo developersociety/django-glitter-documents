@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'glitter.reminders',
     'glitter.tests.sample',
     'glitter.tests.sampleblocks',
+    'glitter_documents',
     'mptt',
     'sorl.thumbnail',
     'taggit',
