@@ -7,7 +7,6 @@ from django.contrib import admin
 
 from glitter import block_admin
 from glitter.admin import GlitterAdminMixin
-from glitter.reminders.admin import ReminderInline
 
 from .models import Category, Document, Format, LatestDocumentsBlock
 
@@ -33,14 +32,14 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',)
     }
-    inlines = [ReminderInline]
 
-    def get_formsets_with_inlines(self, request, obj=None):
-        for inline in self.get_inline_instances(request, obj):
-            if isinstance(inline, ReminderInline):
-                if not apps.is_installed('glitter.reminders'):
-                    continue
-            yield inline.get_formset(request, obj), inline
+    def get_inline_instances(self, request, obj=None):
+        if apps.is_installed('glitter.reminders'):
+            # Import here to prevent migrations on the glitter level.
+            from glitter.reminders.admin import ReminderInline
+            if ReminderInline not in self.inlines:
+                self.inlines.append(ReminderInline)
+        return super(DocumentAdmin, self).get_inline_instances(request, obj)
 
     def get_fieldsets(self, request, obj=None):
         advanced_options = ['tags', 'slug']

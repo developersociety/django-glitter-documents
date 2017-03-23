@@ -33,21 +33,17 @@ class DocumentAdminTestCase(TestCase):
     })
     def test_the_inline_not_appears(self):
         """ Test to make sure inline is not set if the settings variable is not set. """
+        DocumentAdmin.inlines = []
         document_admin = DocumentAdmin(model=Document, admin_site=AdminSite())
-        data = document_admin.changeform_view(self.request, object_id=None)
-        inlines = [
-            formset.opts.__class__ for formset in data.context_data['inline_admin_formsets']
-        ]
-        self.assertNotIn(ReminderInline, inlines)
+        document_admin.get_inline_instances(self.request)
+        self.assertNotIn(ReminderInline, document_admin.inlines)
 
     @modify_settings(INSTALLED_APPS={
         'append': 'glitter.reminders',
     })
     def test_the_inline_appears(self):
         """ Test to make sure inline is not set if the settings variable is not set. """
+        DocumentAdmin.inlines = []
         document_admin = DocumentAdmin(model=Document, admin_site=AdminSite())
-        data = document_admin.changeform_view(self.request, object_id=None)
-        inlines = [
-            formset.opts.__class__ for formset in data.context_data['inline_admin_formsets']
-        ]
-        self.assertIn(ReminderInline, inlines)
+        document_admin.get_inline_instances(self.request)
+        self.assertIn(ReminderInline, document_admin.inlines)
