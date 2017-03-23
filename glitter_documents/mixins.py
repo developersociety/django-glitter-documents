@@ -3,10 +3,6 @@
 from .models import Document, Category
 
 
-def _sort_key(category):
-    return category.title
-
-
 class DocumentMixin(object):
     model = Document
 
