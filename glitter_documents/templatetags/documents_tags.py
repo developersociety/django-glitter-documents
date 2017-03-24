@@ -16,14 +16,14 @@ def get_latest_documents(count=5, category=None):
     document_list = Document.objects.published()
 
     # If object is given as a slug, fetch the actual object or set category
-    # to None so it is not used for filtering. 
+    # to None so it is not used for filtering.
     if category is not None:
         if not isinstance(category, Category):
             try:
                 category = Category.objects.get(slug=category)
             except Category.DoesNotExist:
                 category = None
-    
+
     # Optional filter by category, can be either a sub or parent category
     if category:
         query = Q(pk=category.pk) | Q(parent_category=category)

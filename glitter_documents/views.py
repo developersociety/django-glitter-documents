@@ -29,10 +29,10 @@ class CategoryDocumentListView(DocumentMixin, ListView):
     def get_queryset(self):
         qs = super(CategoryDocumentListView, self).get_queryset()
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
-        
+
         query = Q(pk=self.category.pk) | Q(parent_category=self.category)
         categories = Category.objects.filter(query)
-        
+
         return qs.filter(category__in=categories)
 
     def get_context_data(self, **kwargs):
