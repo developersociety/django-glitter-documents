@@ -20,8 +20,27 @@ class FormatAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     prepopulated_fields = {
-        'slug': ('title',)
+        'slug': ('title', 'parent_category')
     }
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        qs = form.base_fields['parent_category'].queryset
+        # To restrict to only 1 level of dependency we do the following:
+        # - Only show categories that have no parents themselves.
+        qs = qs.filter(parent_category__isnull=True)
+
+        if obj:
+            if obj.category_set.all().exists():
+                # If this category is a parent, it can not have a parent.
+                qs = Category.objects.none()
+            else:
+                # Exclude itself, you can't be your own parent.
+                qs = qs.exclude(pk=obj.pk)
+
+        form.base_fields['parent_category'].queryset = qs
+
+        return form
 
 
 @admin.register(Document)

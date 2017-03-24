@@ -29,6 +29,7 @@ class Format(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique=True)
+    parent_category = models.ForeignKey('self', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'categories'
