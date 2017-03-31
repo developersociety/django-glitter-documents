@@ -1,2 +1,5 @@
 include README.rst
-recursive-include glitter_documents/templates *.html *.txt
+graft glitter_documents
+global-exclude *.py[co]
+global-exclude __pycache__
+global-exclude .DS_Store
