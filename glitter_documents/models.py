@@ -81,6 +81,9 @@ class Document(GlitterMixin):
 
         super(Document, self).save(*args, **kwargs)
 
+    def get_file_extension(self):
+        return os.path.splitext(self.document.name)[1]
+
     def get_file_name(self):
         return os.path.basename(self.document.name)
 
