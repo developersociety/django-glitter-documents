@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
-
+from django.utils.html import mark_safe
 from glitter import block_admin
 from glitter.admin import GlitterAdminMixin
 
@@ -46,7 +46,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Document)
 class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     date_hierarchy = 'created_at'
-    list_display = ('title', 'category', 'document_format', 'file_size', 'is_published')
+    list_display = (
+        'title', 'category', 'document_format', 'file_size', 'view_on_site_link', 'is_published'
+    )
     list_filter = ('category',)
     prepopulated_fields = {
         'slug': ('title',)
@@ -77,6 +79,10 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
         )
         return fieldsets
 
+    def view_on_site_link(self, obj):
+        link_html = '<a href="{url}">View document</a>'.format(url=obj.get_absolute_url())
+        return mark_safe(link_html)
+    view_on_site_link.short_description = 'View document'
 
 block_admin.site.register(LatestDocumentsBlock)
 block_admin.site.register_block(LatestDocumentsBlock, 'App Blocks')
