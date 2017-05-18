@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
 
 from glitter.mixins import GlitterDetailMixin
 
@@ -15,6 +15,7 @@ class DocumentListView(DocumentMixin, ListView):
 
 
 class DocumentDetailView(DocumentMixin, GlitterDetailMixin, DetailView):
+
     def get_context_data(self, **kwargs):
         context = super(DocumentDetailView, self).get_context_data(**kwargs)
         context['current_category'] = self.object.category

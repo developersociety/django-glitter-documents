@@ -6,7 +6,6 @@ from django.db.models import Q
 
 from ..models import Category, Document
 
-
 register = template.Library()
 
 

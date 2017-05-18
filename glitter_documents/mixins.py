@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .models import Document, Category
+from .models import Category, Document
 
 
 class DocumentMixin(object):

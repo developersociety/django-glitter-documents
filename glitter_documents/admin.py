@@ -5,6 +5,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
 from django.utils.html import mark_safe
+
 from glitter import block_admin
 from glitter.admin import GlitterAdminMixin
 
@@ -13,15 +14,13 @@ from .models import Category, Document, Format, LatestDocumentsBlock
 
 @admin.register(Format)
 class FormatAdmin(admin.ModelAdmin):
-    search_fields = ('title',)
+    search_fields = ('title', )
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ('title',)
-    prepopulated_fields = {
-        'slug': ('title', 'parent_category')
-    }
+    search_fields = ('title', )
+    prepopulated_fields = {'slug': ('title', 'parent_category')}
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
@@ -49,10 +48,8 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     list_display = (
         'title', 'category', 'document_format', 'file_size', 'view_on_site_link', 'is_published'
     )
-    list_filter = ('category',)
-    prepopulated_fields = {
-        'slug': ('title',)
-    }
+    list_filter = ('category', )
+    prepopulated_fields = {'slug': ('title', )}
 
     def get_inline_instances(self, request, obj=None):
         if apps.is_installed('glitter.reminders'):
@@ -67,22 +64,21 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
         if not getattr(settings, 'GLITTER_DOCUMENTS_TAGS', False):
             advanced_options.remove('tags')
 
-        fieldsets = (
-            ('Document', {
+        fieldsets = ((
+            'Document', {
                 'fields': (
                     'title', 'category', 'author', 'document', 'document_format', 'summary',
                 )
-            }),
-            ('Advanced options', {
-                'fields': advanced_options
-            }),
-        )
+            }
+        ), ('Advanced options', {'fields': advanced_options}), )
         return fieldsets
 
     def view_on_site_link(self, obj):
         link_html = '<a href="{url}">View document</a>'.format(url=obj.get_absolute_url())
         return mark_safe(link_html)
+
     view_on_site_link.short_description = 'View document'
+
 
 block_admin.site.register(LatestDocumentsBlock)
 block_admin.site.register_block(LatestDocumentsBlock, 'App Blocks')

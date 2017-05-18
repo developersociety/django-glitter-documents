@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 
 import os
 
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.core.urlresolvers import reverse
 
-from PIL import Image
 from glitter.mixins import GlitterMixin
 from glitter.models import BaseBlock
+from PIL import Image
 from taggit.managers import TaggableManager
 
 
@@ -19,7 +19,7 @@ class Format(models.Model):
     title = models.CharField(max_length=100, db_index=True)
 
     class Meta:
-        ordering = ('title',)
+        ordering = ('title', )
 
     def __str__(self):
         return self.title
@@ -33,13 +33,13 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'
-        ordering = ('title',)
+        ordering = ('title', )
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('glitter-documents:category-list', args=(self.slug,))
+        return reverse('glitter-documents:category-list', args=(self.slug, ))
 
 
 @python_2_unicode_compatible
@@ -60,13 +60,13 @@ class Document(GlitterMixin):
 
     class Meta(GlitterMixin.Meta):
         get_latest_by = 'created_at'
-        ordering = ('-created_at',)
+        ordering = ('-created_at', )
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('glitter-documents:detail', args=(self.slug,))
+        return reverse('glitter-documents:detail', args=(self.slug, ))
 
     def save(self, *args, **kwargs):
         # Avoid doing file size requests constantly
