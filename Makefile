@@ -72,6 +72,16 @@ build-clean:
 	find . -name '*.egg' -exec rm -f {} +
 
 build-release:
+	@echo
+	@echo "This will package and release this project to PyPi."
+	@echo
+	@echo "A checklist before you continue:"
+	@echo
+	@echo " - have you ran 'versionbump'?"
+	@echo " - have you pushed the commit and tag created by 'versionbump'?"
+	@echo " - are you sure the project is in a state to be released?"
+	@echo
+	@read -p "Press <enter> to continue. Or <ctrl>-c to quit and address the above points."
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
 
