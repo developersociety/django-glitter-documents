@@ -3,14 +3,13 @@ from codecs import open
 
 from setuptools import find_packages, setup
 
-
 with open('README.rst', 'r', 'utf-8') as f:
     readme = f.read()
 
 
 setup(
     name='django-glitter-documents',
-    version='0.2.3',
+    version='0.2.4',
     description='Glitter Documents',
     long_description=readme,
     url='https://github.com/blancltd/django-glitter-documents',
