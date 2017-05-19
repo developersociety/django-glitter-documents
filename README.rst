@@ -10,7 +10,7 @@ Getting Started
 
 Installation is simple using ``pip``:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ pip install django-glitter-documents
 
@@ -26,7 +26,7 @@ Add ``glitter_documents`` to your site's ``INSTALLED_APPS``:
 
 And finally, remember to run the migrations:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ ./manage.py migrate
 
@@ -38,7 +38,7 @@ Getting started on improving Django Glitter Documents is pretty straight forward
 using `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/en/latest/>`_ and
 `The Developer Society Dev Tools <https://github.com/developersociety/tools>`_:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ dev-clone git@github.com:developersociety/django-glitter-documents.git
     $ make reset
@@ -46,7 +46,7 @@ using `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/en/latest/>`_
 Please remember to run ``make format`` before you commit, and ``tox`` before pushing the changes you
 make:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ make format
     $ git add .
@@ -69,20 +69,20 @@ Then, use ``bumpversion`` to increment the version numbers in the project. This 
 commit and a tag automatically for the new version. For example, to increment the version numbers
 for a 'patch' release:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ bumpversion patch
     $ git push --tags origin master
 
 ``bumpversion`` can increment 'patch', 'minor' or 'major' version numbers:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ bumpversion [patch | minor | major]
 
 Then release the new version to PyPi:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ make release
 
