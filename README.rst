@@ -43,14 +43,17 @@ using `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/en/latest/>`_
     $ dev-clone git@github.com:developersociety/django-glitter-documents.git
     $ make reset
 
-Please remember to run `tox` before pushing the changes you make:
+Please remember to run `make format` before you commit, and `tox` before pushing the changes you
+make:
 
 .. code-block:: sh
 
+    $ make format
     $ git add .
     $ git commit -m 'Made it do something awesome!'
     $ tox
     $ git push
+
 
 
 Releasing
