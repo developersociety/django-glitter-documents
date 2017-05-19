@@ -9,7 +9,7 @@ with open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='django-glitter-documents',
-    version='0.2.5',
+    version='0.2.6',
     description='Glitter Documents',
     long_description=readme,
     url='https://github.com/blancltd/django-glitter-documents',
