@@ -82,6 +82,8 @@ for a 'patch' release:
 
 Then release the new version to PyPi:
 
+.. code-block:: sh
+
     $ make release
 
 
