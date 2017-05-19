@@ -10,3 +10,5 @@ build
 .coverage.*
 coverage.xml
 htmlcov/
+
+npm-debug.log
