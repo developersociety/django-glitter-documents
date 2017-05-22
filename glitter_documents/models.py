@@ -6,6 +6,7 @@ import os
 
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 from glitter.mixins import GlitterMixin
@@ -55,12 +56,13 @@ class Document(GlitterMixin):
     summary = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True, db_index=True)
+    publish_at = models.DateTimeField(default=timezone.now, db_index=True)
 
     tags = TaggableManager(blank=True)
 
     class Meta(GlitterMixin.Meta):
-        get_latest_by = 'created_at'
-        ordering = ('-created_at', )
+        get_latest_by = 'publish_at'
+        ordering = ('-publish_at', )
 
     def __str__(self):
         return self.title
