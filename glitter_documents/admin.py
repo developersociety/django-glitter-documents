@@ -61,7 +61,7 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
         return super(DocumentAdmin, self).get_inline_instances(request, obj)
 
     def get_fieldsets(self, request, obj=None):
-        advanced_options = ['tags', 'slug']
+        advanced_options = ['tags', 'slug', 'publish_at']
         if not getattr(settings, 'GLITTER_DOCUMENTS_TAGS', False):
             advanced_options.remove('tags')
 
@@ -69,7 +69,6 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
             'Document', {
                 'fields': (
                     'title', 'category', 'author', 'document', 'document_format', 'summary',
-                    'publish_at',
                 )
             }
         ), ('Advanced options', {'fields': advanced_options}), )
