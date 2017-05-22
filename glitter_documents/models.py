@@ -14,6 +14,8 @@ from glitter.models import BaseBlock
 from PIL import Image
 from taggit.managers import TaggableManager
 
+from .managers import GlitterManagerOverride
+
 
 @python_2_unicode_compatible
 class Format(models.Model):
@@ -59,6 +61,8 @@ class Document(GlitterMixin):
     publish_at = models.DateTimeField(default=timezone.now, db_index=True)
 
     tags = TaggableManager(blank=True)
+
+    objects = GlitterManagerOverride()
 
     class Meta(GlitterMixin.Meta):
         get_latest_by = 'publish_at'

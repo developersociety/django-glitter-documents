@@ -44,9 +44,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Document)
 class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
-    date_hierarchy = 'created_at'
+    date_hierarchy = 'publish_at'
     list_display = (
-        'title', 'category', 'document_format', 'file_size', 'view_on_site_link', 'is_published'
+        'title', 'category', 'document_format', 'file_size', 'view_on_site_link', 'publish_at',
+        'is_published',
     )
     list_filter = ('category', )
     prepopulated_fields = {'slug': ('title', )}
@@ -68,6 +69,7 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
             'Document', {
                 'fields': (
                     'title', 'category', 'author', 'document', 'document_format', 'summary',
+                    'publish_at',
                 )
             }
         ), ('Advanced options', {'fields': advanced_options}), )
