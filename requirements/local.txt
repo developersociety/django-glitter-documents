@@ -1,6 +1,9 @@
-flake8==3.3.0
-pipdeptree==0.10.1
-isort==4.2.5
-yapf==0.16.1
-coverage==4.4.1
 bumpversion==0.5.3
+coverage==4.4.1
+-e git+ssh://git@github.com/blancltd/django-glitter.git@master#egg=django-glitter
+flake8==3.3.0
+isort==4.2.5
+pipdeptree==0.10.1
+yapf==0.16.1
+Pillow==3.0
+django-taggit==0.21.3

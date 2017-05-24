@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'glitter',
+    'glitter.assets',
     'glitter.reminders',
     'glitter_documents',
     'taggit',
