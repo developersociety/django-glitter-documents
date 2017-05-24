@@ -45,6 +45,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Document)
 class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     date_hierarchy = 'publish_at'
+    raw_id_fields = ('image',)
     list_display = (
         'title', 'category', 'document_format', 'file_size', 'view_on_site_link', 'publish_at',
         'is_published',
@@ -61,7 +62,7 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
         return super(DocumentAdmin, self).get_inline_instances(request, obj)
 
     def get_fieldsets(self, request, obj=None):
-        advanced_options = ['tags', 'slug', 'publish_at']
+        advanced_options = ['slug', 'tags', 'image', 'publish_at']
         if not getattr(settings, 'GLITTER_DOCUMENTS_TAGS', False):
             advanced_options.remove('tags')
 

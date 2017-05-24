@@ -9,10 +9,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
-from glitter.mixins import GlitterMixin
-from glitter.models import BaseBlock
 from PIL import Image
 from taggit.managers import TaggableManager
+
+from glitter.assets.fields import AssetForeignKey
+from glitter.mixins import GlitterMixin
+from glitter.models import BaseBlock
 
 from .managers import GlitterManagerOverride
 
@@ -51,6 +53,13 @@ class Document(GlitterMixin):
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(Category)
     document = models.FileField(max_length=200, upload_to='documents/document/%Y/%m')
+    image = AssetForeignKey(
+        'glitter_assets.Image',
+        blank=True,
+        null=True,
+        on_delete=models.PROTECT,
+        help_text='Preview document image',
+    )
     valid_image = models.BooleanField(default=False, editable=False)
     author = models.CharField(blank=True, max_length=32)
     file_size = models.PositiveIntegerField(default=0, editable=False)
