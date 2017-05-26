@@ -1,0 +1,5 @@
+-r base.txt
+
+Pillow==3.0
+coverage==4.4.1
+flake8==3.3.0

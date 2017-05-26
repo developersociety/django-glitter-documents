@@ -1,0 +1,2 @@
+-e git+ssh://git@github.com/blancltd/django-glitter.git@master#egg=django-glitter
+django-taggit==0.21.3
