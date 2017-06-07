@@ -54,11 +54,18 @@ class DocumentAdmin(GlitterAdminMixin, admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
     def get_inline_instances(self, request, obj=None):
+        # Optional glitter applications. Both are imported after the is_installed check to prevent
+        # migrations applied to the core glitter app
+        if apps.is_installed('glitter.publisher'):
+            from glitter.publisher.admin import ActionInline
+            if ActionInline not in self.inlines:
+                self.inlines = self.inlines + [ActionInline]
+
         if apps.is_installed('glitter.reminders'):
-            # Import here to prevent migrations on the glitter level.
             from glitter.reminders.admin import ReminderInline
             if ReminderInline not in self.inlines:
-                self.inlines.append(ReminderInline)
+                self.inlines = self.inlines + [ReminderInline]
+
         return super(DocumentAdmin, self).get_inline_instances(request, obj)
 
     def get_fieldsets(self, request, obj=None):
