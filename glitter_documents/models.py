@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 
 import os
@@ -15,8 +14,6 @@ from taggit.managers import TaggableManager
 from glitter.assets.fields import AssetForeignKey
 from glitter.mixins import GlitterMixin
 from glitter.models import BaseBlock
-
-from .managers import GlitterManagerOverride
 
 
 @python_2_unicode_compatible
