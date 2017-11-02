@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django import template
 from django.db.models import Q
+from django.utils import timezone
 
 from ..models import Category, Document
 
@@ -13,6 +14,8 @@ register = template.Library()
 def get_latest_documents(count=5, category=None):
     """ Accepts category or category slug. """
     document_list = Document.objects.published()
+    now = timezone.now()
+    document_list = document_list.filter(publish_at__lte=now)
 
     # If object is given as a slug, fetch the actual object or set category
     # to None so it is not used for filtering.

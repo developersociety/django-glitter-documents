@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.utils import timezone
+
 from haystack import indexes
 
 from .models import Document
@@ -12,4 +14,6 @@ class DocumentIndex(indexes.SearchIndex, indexes.Indexable):
         return Document
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.published().select_related()
+        qs = self.get_model().objects.published().select_related()
+        now = timezone.now()
+        return qs.filter(publish_at__lte=now)
