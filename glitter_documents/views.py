@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
 from glitter.mixins import GlitterDetailMixin
@@ -12,6 +13,11 @@ from .models import Category, Document
 class DocumentListView(DocumentMixin, ListView):
     paginate_by = 10
     queryset = Document.objects.published()
+
+    def get_queryset(self):
+        queryset = super(DocumentListView, self).get_queryset()
+        now = timezone.now()
+        return queryset.filter(publish_at__lte=now)
 
 
 class DocumentDetailView(DocumentMixin, GlitterDetailMixin, DetailView):
@@ -29,6 +35,9 @@ class CategoryDocumentListView(DocumentMixin, ListView):
 
     def get_queryset(self):
         qs = super(CategoryDocumentListView, self).get_queryset()
+        now = timezone.now()
+        qs = qs.filter(publish_at__lte=now)
+
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
 
         query = Q(pk=self.category.pk) | Q(parent_category=self.category)

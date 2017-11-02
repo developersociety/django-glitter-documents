@@ -71,8 +71,6 @@ class Document(GlitterMixin):
 
     tags = TaggableManager(blank=True)
 
-    objects = GlitterManagerOverride()
-
     class Meta(GlitterMixin.Meta):
         get_latest_by = 'publish_at'
         ordering = ('-publish_at', )
