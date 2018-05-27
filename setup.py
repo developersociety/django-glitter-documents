@@ -13,7 +13,7 @@ setup(
     description='Glitter Documents',
     long_description=readme,
     url='https://github.com/developersociety/django-glitter-documents',
-    maintainer='Developer Society',
+    maintainer='The Developer Society',
     maintainer_email='studio@dev.ngo',
     platforms=['any'],
     packages=find_packages(exclude=['tests']),
