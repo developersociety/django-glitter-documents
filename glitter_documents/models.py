@@ -90,7 +90,7 @@ class Document(GlitterMixin):
             self.valid_image = False
 
         super(Document, self).save(*args, **kwargs)
-        
+
         # Attach a version to it
         version = Version(
             content_object=self,
@@ -100,7 +100,6 @@ class Document(GlitterMixin):
         version.save()
         self.current_version = version
         super(Document, self).save(*args, **kwargs)
-
 
     def get_file_extension(self):
         return os.path.splitext(self.document.name)[1]
