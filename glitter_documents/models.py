@@ -13,7 +13,7 @@ from taggit.managers import TaggableManager
 
 from glitter.assets.fields import AssetForeignKey
 from glitter.mixins import GlitterMixin
-from glitter.models import BaseBlock
+from glitter.models import BaseBlock, Version
 
 
 @python_2_unicode_compatible
@@ -90,6 +90,17 @@ class Document(GlitterMixin):
             self.valid_image = False
 
         super(Document, self).save(*args, **kwargs)
+        
+        # Attach a version to it
+        version = Version(
+            content_object=self,
+            template_name='',
+        )
+        version.generate_version()
+        version.save()
+        self.current_version = version
+        super(Document, self).save(*args, **kwargs)
+
 
     def get_file_extension(self):
         return os.path.splitext(self.document.name)[1]
