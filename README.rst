@@ -96,9 +96,6 @@ Version History
 Add `EdgeNgramField` for the `DocumentIndex`
 https://github.com/developersociety/django-glitter-documents/pull/33
 
-Added Makefile for linting, beautficiation and easier PyPi releasing.
-https://github.com/developersociety/django-glitter-documents/pull/18
-
 0.2.5
 ~~~~~
 
